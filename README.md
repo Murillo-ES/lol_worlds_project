@@ -1,9 +1,9 @@
 # League of Legends Worlds Championship Data Analysis
 
-THIS IS STILL A WORK IN PROGRESS!
+===THIS IS STILL A WORK IN PROGRESS!===
 
 ## Description
-This project analyzes professional League of Legends esports, specifically the Worlds Championship, from 2011 to 2022, to uncover insights on team performance, champion usage, atch outcomes, and more.
+This project analyzes professional League of Legends esports, specifically the Worlds Championship, from 2011 to 2022, to uncover insights on team performance, champion usage, match outcomes, and more.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -15,17 +15,24 @@ This project analyzes professional League of Legends esports, specifically the W
 
 ## Installation
 1. Clone the repository:
-    >>> LINK GOES HERE
+    ```bash
+    git clone https://github.com/Murillo-ES/lol_worlds_project.git
+    ```
 2. Create a virtual environment and activate it:
-    >>> VIRTUAL ENVIRONMENT BASH
+    ```bash
+    python -m venv env
+    source env/bin/activate # Or "env\Scripts\activate" if you use Windows
+    ```
 3. Install the required dependencies:
-    >>> PANDAS, REQUESTS, NUMPY
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Usage
 1. Download the dataset from [Kaggle](https://www.kaggle.com/datasets/pedrocsar/league-of-legends-worlds-20112022-stats/data) and place it in the `data` directory.
 2. Run the data loading script:
     ```bash
-        python data_loading.py
+    python data_loading.py
     ```
 
 ## Data
