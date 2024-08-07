@@ -1,6 +1,6 @@
 # League of Legends Worlds Championship Data Analysis
 
-===THIS IS STILL A WORK IN PROGRESS!===
+**THIS IS STILL A WORK IN PROGRESS!**
 
 ## Description
 This project analyzes professional League of Legends esports, specifically the Worlds Championship, from 2011 to 2022, to uncover insights on team performance, champion usage, match outcomes, and more.
