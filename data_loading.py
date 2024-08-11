@@ -4,62 +4,104 @@ import pandas as pd
 
 
 def setup_logging():
+    """
+    This function will setup our 'logging' module to our preferences.
+    """
+
     logging.basicConfig(level=logging.INFO, format='%(asctime)s \
 - %(levelname)s - %(message)s')
 
 
-def load_data():
-    # Current working directory
-    script_dir = os.path.dirname(__file__)
+def load_csv(folder_name: str, csv_name: str) -> pd.DataFrame:
+    """
+    This function loads a specific CSV using pandas 'read_csv' function.
 
-    # File paths
-    champions_stats_path = os.path.join(
-        script_dir,
-        'data',
-        'champions_stats.csv'
-    )
-    matchs_stats_path = os.path.join(script_dir, 'data', 'matchs_stats.csv')
-    players_stats_path = os.path.join(script_dir, 'data', 'players_stats.csv')
+    Parameters:
+        folder_name (str): Name of the folder where the csv is currently in.
+        csv_name (str): CSV's name **without the '.csv' particle**.
 
-    # Load datasets
-    try:
-        champions_stats = pd.read_csv(champions_stats_path)
-        logging.info('champions_stats loaded succesfully.')
-    except FileNotFoundError as e:
-        logging.error(f'Error loading champions_stats: "{e}".')
-        logging.error('Please check that the champions_stats file path is \
-correct.')
-        champions_stats = None
+    Returns:
+        A pd.DataFrame with the CSV's content.
+    """
+
+    dir_path = os.path.dirname(__file__)
+    csv_path = os.path.join(dir_path, f'{folder_name}', f'{csv_name}.csv')
 
     try:
-        matchs_stats = pd.read_csv(matchs_stats_path)
-        logging.info('matchs_stats loaded succesfully.')
+        csv = pd.read_csv(csv_path)
+        logging.info(f'{csv_name} loaded succesfully.')
+        return csv
     except FileNotFoundError as e:
-        logging.error(f'Error loading matchs_stats: "{e}".')
-        logging.error('Please check that the matchs_stats file path is \
-correct.')
-        matchs_stats = None
+        logging.error(f'Error loading {csv_name}: "{e}"')
+        print('Please check if the folder and csv names are correct.')
 
-    try:
-        players_stats = pd.read_csv(players_stats_path)
-        logging.info('players_stats loaded succesfully.')
-    except FileNotFoundError as e:
-        logging.error(f'Error loading players_stats: "{e}".')
-        logging.error('Please check that the players_stats file path is \
-correct.')
-        players_stats = None
+
+def load_raw_data():
+    """
+    Loads our raw data.
+    """
+
+    champions_stats = load_csv('data', 'champions_stats')
+    matchs_stats = load_csv('data', 'matchs_stats')
+    players_stats = load_csv('data', 'players_stats')
 
     return champions_stats, matchs_stats, players_stats
 
 
-if __name__ == "__main__":
-    setup_logging()
-    champions_stats, matchs_stats, players_stats = load_data()
+def load_clean_data():
+    """
+    Loads our clean data.
+    """
 
-    if (champions_stats is not None and
-            matchs_stats is not None and
-            players_stats is not None):
-        logging.info('All datasets loaded succesfully.\n')
-    else:
-        logging.error('One or more datasets failed to load. Please check the \
-    errors above.')
+    champions_stats = load_csv(
+        'clean_data',
+        'champions_stats'
+    )
+    champions_stats_s1_to_s3 = load_csv(
+        'clean_data',
+        'champions_stats_s1_to_s3'
+    )
+    champions_stats_s4_to_s9 = load_csv(
+        'clean_data',
+        'champions_stats_s4_to_s9'
+    )
+    champions_stats_s10_above = load_csv(
+        'clean_data',
+        'champions_stats_s10_above'
+    )
+    matchs_stats = load_csv(
+        'clean_data',
+        'matchs_stats'
+    )
+    players_stats = load_csv(
+        'clean_data',
+        'players_stats'
+    )
+    players_stats_s1_to_s3 = load_csv(
+        'clean_data',
+        'players_stats_s1_to_s3'
+    )
+    players_stats_s4_to_s9 = load_csv(
+        'clean_data',
+        'players_stats_s4_to_s9'
+    )
+    players_stats_s10_above = load_csv(
+        'clean_data',
+        'players_stats_s10_above'
+    )
+
+    return (
+        champions_stats,
+        champions_stats_s1_to_s3,
+        champions_stats_s4_to_s9,
+        champions_stats_s10_above,
+        matchs_stats,
+        players_stats,
+        players_stats_s1_to_s3,
+        players_stats_s4_to_s9,
+        players_stats_s10_above
+    )
+
+
+if __name__ == "__main__":
+    pass
